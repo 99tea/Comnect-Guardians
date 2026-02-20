@@ -126,6 +126,7 @@ Pontuação Final = Score Base
                + Bônus de Perfeição       (100% de acerto)
                + Bônus de Streak          (multiplicador por dias consecutivos)
 ```
+<img width="669" height="778" alt="image" src="https://github.com/user-attachments/assets/6ea3cda1-493a-4973-83df-5c9ac2553e60" />
 
 ### Especializações (Caminhos)
 
@@ -145,6 +146,7 @@ Troca de caminho sujeita a cooldown configurável (dias) e threshold mínimo de 
 - Cada especialização tem sua própria árvore de `NivelSeguranca` com threshold de XP, avatar e título exclusivos por nível
 - Progresso visual no perfil com barra de XP e indicador do próximo nível
 - Ranking global com posição calculada em tempo real
+<img width="565" height="89" alt="image" src="https://github.com/user-attachments/assets/2e26a6f3-4eb7-44ee-a242-352b7eeed8bc" />
 
 ### Conquistas (Insígnias)
 
@@ -198,18 +200,6 @@ Categorias de itens:
 
 Modalidade simplificada desenvolvida para colaboradores fora do time principal, sem duplicação de infraestrutura — utiliza a mesma base de dados com isolamento lógico via flag `is_externo`.
 
-### Implementação Técnica
-
-| Componente | Solução |
-|------------|---------|
-| Identificação | Coluna `is_externo` na tabela `usuarios` + flag na sessão Flask |
-| Autenticação | Mesmo sistema de login com redirecionamento automático pós-login |
-| Rastreamento | Campo `external_user_id` em `quiz_attempts` (`guardian_id` tornado nullable) |
-| Avatar | Coluna `avatar_seed` persistida em `usuarios` (DiceBear API) |
-| Pontuação | Apenas score base — sem bônus, streak ou especialização |
-| Isolamento | Ranking e perfil exclusivos, invisíveis para usuários internos |
-| Decorator | `@externo_required` bloqueia acesso de internos às rotas externas |
-
 ### Fluxo do Usuário Externo
 
 ```
@@ -224,31 +214,6 @@ Login
                                       └─▶ meu_perfil_externo
 ```
 
-### Perfil Externo
-
-- Estatísticas: posição no ranking, pontuação total, quizzes feitos, precisão geral
-- Barra de precisão animada via CSS transition
-- Gráfico de evolução de pontuação por quiz (Chart.js, scroll horizontal automático)
-- Histórico de atividades paginado — 10 entradas por vez com botão "ver mais"
-- Mensagem motivacional dinâmica baseada na posição no ranking e precisão
-- Edição de perfil via modal inline: nome de exibição e avatar
-
-### Proteção Anti-Cópia nos Quizzes
-
-```javascript
-document.addEventListener('copy',        e => e.preventDefault());
-document.addEventListener('cut',         e => e.preventDefault());
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-    const blocked = (e.ctrlKey && ['c','x','a','u','s'].includes(e.key.toLowerCase()))
-                 || e.key === 'F12'
-                 || e.key === 'PrintScreen';
-    if (blocked) e.preventDefault();
-});
-```
-
----
-
 ## Painel Administrativo
 
 Controle completo sobre conteúdo, usuários e métricas, acessível apenas a `guardian_admin` ou `portal_admin`.
@@ -261,14 +226,17 @@ Controle completo sobre conteúdo, usuários e métricas, acessível apenas a `g
 | **Analytics Hub** | Visão geral, análise individual de quiz e relatório detalhado por guardião |
 | **Gestão de Externos** | Reset de temporada (todas as tentativas) e reset individual por usuário e quiz |
 | **Feedback Hub** | Visualização e gestão de feedbacks enviados in-game |
+<img width="1883" height="849" alt="image" src="https://github.com/user-attachments/assets/51853b12-3fb4-4ff1-9e6f-3bcf451004a9" />
 
 ### Guardian Skill Index (GSI)
 
 Métrica proprietária calculada para cada guardião combinando taxa de acerto, engajamento, streak e desempenho relativo ao grupo. Resultado: índice de **0 a 1000** exibido em gráfico de distribuição e ranking Top 5 no painel.
+<img width="889" height="359" alt="image" src="https://github.com/user-attachments/assets/b48d36b9-9253-4832-98b4-fca57e370471" />
 
 ### Analytics de Quiz
 
 Para cada quiz, o admin visualiza taxa de acerto por questão e por alternativa, distribuição de votos, respostas individuais por guardião, tempo médio de conclusão e dificuldade relativa ao conjunto.
+<img width="1579" height="797" alt="image" src="https://github.com/user-attachments/assets/20b0154d-2332-4ab3-a26e-c6c1fab64878" />
 
 ---
 
