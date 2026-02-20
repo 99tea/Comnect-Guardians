@@ -108,6 +108,8 @@ application/
 | **Decriptar (Anagramas)** | Desembaralhe palavras e termos técnicos para pontuar | Múltiplas palavras por rodada, pontuação por acerto |
 | **Segredo (Cofre de Senhas)** | Crie senhas que atendam a requisitos dinâmicos e progressivos | Requisitos gerados progressivamente, valida força e complexidade |
 | **Patrulha Diária** | Mini-jogo diário de adivinhar PIN de 4 dígitos (Mastermind) | Feedback por posição e ocorrência, máximo 10 tentativas por dia |
+<img width="1196" height="792" alt="image" src="https://github.com/user-attachments/assets/512f69a3-490d-4fba-bc84-43c3bda65ff4" />
+<img width="386" height="207" alt="image" src="https://github.com/user-attachments/assets/a668142c-932c-456a-b0f6-2849a509910e" />
 
 ---
 
@@ -136,6 +138,7 @@ Três caminhos com árvores de nível exclusivas, bônus passivos únicos e iden
 | ⚪ Gestor | `cinza` | Governança, gestão de risco e conformidade |
 
 Troca de caminho sujeita a cooldown configurável (dias) e threshold mínimo de XP, ambos ajustáveis pelo admin via `GlobalSettings`.
+<img width="1877" height="842" alt="image" src="https://github.com/user-attachments/assets/19f31330-0d03-4d47-8909-efae391ad220" />
 
 ### Progressão e Níveis
 
@@ -149,24 +152,28 @@ Troca de caminho sujeita a cooldown configurável (dias) e threshold mínimo de 
 - Cada insígnia pode ter bônus passivo permanente (`bonus_type` + `bonus_value`)
 - O guardião pode equipar até N insígnias em destaque no perfil (configurável)
 - Agrupadas por categoria com ordem customizável no admin
+<img width="780" height="827" alt="image" src="https://github.com/user-attachments/assets/292aad4e-fc30-4d74-87e7-6b6d268e86b7" />
 
 ### Streak e Sequência
 
 - Bônus multiplicador progressivo por dias consecutivos de participação
 - Tracker visual semanal no perfil (7 indicadores coloridos por status do dia)
 - Streak quebrado por inatividade, com estado `lost` rastreado para analytics
+<img width="232" height="74" alt="image" src="https://github.com/user-attachments/assets/77c4322b-94f2-49ef-9262-ac668d41dab3" />
 
 ### Missões Semanais
 
 - Sets gerados semanalmente com objetivos variados (quizzes, minigames, patrulha)
 - Rastreamento de progresso individual por missão (`current_progress` / `target_value`)
 - Recompensa em Guardian Coins ao completar todas as missões do set
+<img width="780" height="200" alt="image" src="https://github.com/user-attachments/assets/1d3aa6ac-c768-4c4a-91eb-8945bd5529e0" />
 
 ### Tokens de Retake
 
 - Moeda especial obtida por desempenho perfeito (100% em quiz ou minigame)
 - Configurável: quantos perfeitos são necessários para gerar 1 token
 - Permite refazer um desafio já concluído uma vez
+<img width="377" height="152" alt="image" src="https://github.com/user-attachments/assets/80dab65b-f644-49a1-bb90-e6d75ca7ca26" />
 
 ### Loja de Upgrades (Guardian Coins)
 
@@ -183,6 +190,7 @@ Categorias de itens:
 - **Raridades**: Common, Rare, Epic com chances configuráveis pelo admin
 - **Inventário com slots**: limite de módulos passivos ativos simultâneos
 - **Expiração real**: `expires_at` calculado em compra com base em `duration_days` do item
+<img width="1655" height="794" alt="image" src="https://github.com/user-attachments/assets/b1241cdb-d0b2-4f45-905a-76aa83dfe566" />
 
 ---
 
