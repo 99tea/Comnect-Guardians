@@ -1,0 +1,146 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Painel</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style_header.css') }}">
+
+
+<!--Botão Hamburguer-->
+<button id="menuToggle" class="btn btn-dark toggle-btn">
+    <i class="bi bi-list"></i>
+</button>
+
+
+<!--Sidebar-->
+<aside id="sidebar" class="sidebar collapsed">
+    <div class="sidebar-header text-center">
+        <img src="{{ url_for('static', filename='img/logo-orion.png') }}"
+             class="sidebar-logo" alt="Logo">
+    </div>
+
+    {% if is_authenticated %}
+    <ul class="sidebar-nav">
+
+        {% if session.get('is_externo') %}
+            <li>
+                <a href="{{ url_for('guardians_bp.central_externa') }}">
+                    <i class="bi bi-backpack2"></i> Desafios
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('guardians_bp.ranking_externo') }}">
+                    <i class="bi bi-trophy"></i> Ranking
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('guardians_bp.meu_perfil_externo') }}">
+                    <i class="bi bi-person-circle"></i> Meu Perfil
+                </a>
+            </li>
+
+        {% elif is_portal_admin %}
+            <li class="submenu">
+                <a class="submenu-toggle"><i class="bi bi-lightbulb"></i> Insights ▼</a>
+                <ul class="submenu-items">
+                    <li><a href="/insights"><i class="bi bi-bar-chart"></i> Insights</a></li>
+                    <li><a href="/operacao"><i class="bi bi-person-workspace"></i> Operações</a></li>
+                </ul>
+            </li>
+            <li class="submenu">
+                <a class="submenu-toggle"><i class="bi bi-gear"></i> Operadores ▼</a>
+                <ul class="submenu-items" id="submenu-operadores"></ul>
+            </li>
+            <li class="submenu">
+                <a class="submenu-toggle"><i class="bi bi-gear"></i> Grupos ▼</a>
+                <ul class="submenu-items" id="submenu-grupos"></ul>
+            </li>
+            <li><a href="/dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+            <li><a href="/okrs"><i class="bi bi-flag"></i> OKRs</a></li>
+            <li class="submenu">
+                <a class="submenu-toggle"><i class="bi bi-gear"></i> Gestão ▼</a>
+                <ul class="submenu-items">
+                    <li><a href="/relatorios"><i class="bi bi-clipboard2-minus-fill"></i> Relatórios</a></li>
+                    <li><a href="/escala"><i class="bi bi-file-ruled"></i> Escala</a></li>
+                    <li><a href="/eventos"><i class="bi bi-patch-exclamation"></i> Eventos</a></li>
+                    <li><a href="/register"><i class="bi bi-person-gear"></i> Gerenciamento</a></li>
+                </ul>
+            </li>
+            <li class="submenu">
+                <a class="submenu-toggle"><i class="bi bi-shield"></i> Guardians ▼</a>
+                <ul class="submenu-items">
+                    <li><a href="{{ url_for('guardians_bp.central') }}"><i class="bi bi-backpack2"></i> Central</a></li>
+                    <li><a href="{{ url_for('guardians_bp.rankings') }}"><i class="bi bi-trophy"></i> Rankings</a></li>
+                    <li><a href="{{ url_for('guardians_bp.loja') }}"><i class="bi bi-battery-charging"></i> Upgrades</a></li>
+                    <li><a href="{{ url_for('guardians_bp.feedback_form') }}"><i class="bi bi-flag"></i> Reportar</a></li>
+                    <li><a href="{{ url_for('guardians_bp.meu_perfil') }}"><i class="bi bi-person-circle"></i> Meu Perfil</a></li>
+                </ul>
+            </li>
+
+        {% elif is_nivel2 == 1 %}
+            <li><a href="{{ url_for('home_bp.render_performance_n2') }}"><i class="bi bi-graph-up"></i> Performance</a></li>
+            <li><a href="/dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+            <li><a href="/relatoriosIndividual"><i class="bi bi-clipboard2-minus-fill"></i> Relatórios</a></li>
+            <li class="submenu">
+                <a class="submenu-toggle"><i class="bi bi-shield"></i> Guardians ▼</a>
+                <ul class="submenu-items">
+                    <li><a href="{{ url_for('guardians_bp.central') }}"><i class="bi bi-backpack2"></i> Central</a></li>
+                    <li><a href="{{ url_for('guardians_bp.rankings') }}"><i class="bi bi-trophy"></i> Rankings</a></li>
+                    <li><a href="{{ url_for('guardians_bp.loja') }}"><i class="bi bi-battery-charging"></i> Upgrades</a></li>
+                    <li><a href="{{ url_for('guardians_bp.feedback_form') }}"><i class="bi bi-flag"></i> Reportar</a></li>
+                    <li><a href="{{ url_for('guardians_bp.meu_perfil') }}"><i class="bi bi-person-circle"></i> Meu Perfil</a></li>
+                </ul>
+            </li>
+
+        {% elif is_nivel2 == 2 %}
+            <li><a href="/dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+            <li><a href="#"><i class="bi bi-flag"></i> OKRs</a></li>
+            <li class="submenu">
+                <a class="submenu-toggle"><i class="bi bi-shield"></i> Guardians ▼</a>
+                <ul class="submenu-items">
+                    <li><a href="{{ url_for('guardians_bp.central') }}"><i class="bi bi-backpack2"></i> Central</a></li>
+                    <li><a href="{{ url_for('guardians_bp.rankings') }}"><i class="bi bi-trophy"></i> Rankings</a></li>
+                    <li><a href="{{ url_for('guardians_bp.loja') }}"><i class="bi bi-battery-charging"></i> Upgrades</a></li>
+                    <li><a href="{{ url_for('guardians_bp.feedback_form') }}"><i class="bi bi-flag"></i> Reportar</a></li>
+                    <li><a href="{{ url_for('guardians_bp.meu_perfil') }}"><i class="bi bi-person-circle"></i> Meu Perfil</a></li>
+                </ul>
+            </li>
+
+        {% else %}
+            <li><a href="{{ url_for('home_bp.render_performance') }}"><i class="bi bi-graph-up"></i> Performance</a></li>
+            <li><a href="/dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+            <li><a href="/escala"><i class="bi bi-file-ruled"></i> Escala</a></li>
+            <li><a href="/okrsIndividual"><i class="bi bi-flag"></i> OKRs</a></li>
+            <li class="submenu">
+                <a class="submenu-toggle"><i class="bi bi-shield"></i> Guardians ▼</a>
+                <ul class="submenu-items">
+                    <li><a href="{{ url_for('guardians_bp.central') }}"><i class="bi bi-backpack2"></i> Central</a></li>
+                    <li><a href="{{ url_for('guardians_bp.rankings') }}"><i class="bi bi-trophy"></i> Rankings</a></li>
+                    <li><a href="{{ url_for('guardians_bp.loja') }}"><i class="bi bi-battery-charging"></i> Upgrades</a></li>
+                    <li><a href="{{ url_for('guardians_bp.feedback_form') }}"><i class="bi bi-flag"></i> Reportar</a></li>
+                    <li><a href="{{ url_for('guardians_bp.meu_perfil') }}"><i class="bi bi-person-circle"></i> Meu Perfil</a></li>
+                </ul>
+            </li>
+
+        {% endif %}
+
+        <hr>
+
+        {% if is_guardian_admin and not session.get('is_externo') %}
+            <li><a href="{{ url_for('admin_v2_bp.guardian_hub') }}">
+                <i class="bi bi-shield-lock"></i> Painel Admin
+            </a></li>
+        {% endif %}
+
+        <li>
+            <form action="{{ url_for('login.logout') }}" method="POST">
+                <button class="btn btn-danger btn-sm w-100">
+                    <i class="bi bi-box-arrow-right"></i> Sair
+                </button>
+            </form>
+        </li>
+    </ul>
+    {% endif %}
+</aside>
+
+
+<script src="{{ url_for('static', filename='js/header.js') }}"></script>
+
