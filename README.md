@@ -1,4 +1,4 @@
-# 🛡️ Guardians Platform
+# 🛡️ COMNEcT Guardians 
 
 > **Módulo de gamificação educativa para Cyber Security com elementos de RPG**  
 > Desenvolvido como projeto solo e integrado a um sistema interno corporativo (Orion Connect)
@@ -21,7 +21,7 @@
 
 ## Sobre o Módulo
 
-O **Guardians Platform** é um sistema de gamificação educativa desenvolvido para engajar colaboradores em treinamentos de segurança da informação de forma progressiva e interativa. Inspirado em jogos de RPG e plataformas de e-learning, transforma conteúdos de cyber security em uma experiência com progressão real, recompensas e competição saudável.
+O **COMNEcT Guardians** é um sistema de gamificação educativa desenvolvido para engajar colaboradores em treinamentos de segurança da informação de forma progressiva e interativa. Inspirado em jogos de RPG e plataformas de e-learning, transforma conteúdos de cyber security em uma experiência com progressão real, recompensas e competição saudável.
 
 O módulo foi desenvolvido integralmente por mim como uma extensão de um sistema interno corporativo, cobrindo todas as camadas: modelagem do banco, lógica de negócio, templates, sistema de gamificação e deploy.
 
@@ -70,6 +70,11 @@ modules/
 └── guardians/
     ├── routes.py                   # Rotas de jogadores e externos
     └── admin_refactored_routes.py  # Rotas do painel admin v2
+    └── logic.py  # Rotas com lógica de cáculo de pontos
+    └── missions_logic.py  # Rotas com lógicas de missões diárias
+    └── my_profile.py  # Rotas da página de meu perfil
+    └── password_game_rules.py  # Rotas para minigame de senhas
+    └── utils_assistant.py  # Rotas do assitente de tutoriais
 
 templates/
 └── guardians/
@@ -99,9 +104,9 @@ application/
 | Tipo | Descrição | Mecânica |
 |------|-----------|----------|
 | **Quiz** | Questionários de múltipla escolha sobre cyber security com timer | Score base + bônus multicamada, retake com token |
-| **Termo (Wordle)** | Adivinhe a palavra secreta relacionada a segurança em N tentativas | Feedback por cor de letra (posição e existência) |
-| **Anagrama** | Desembaralhe palavras e termos técnicos para pontuar | Múltiplas palavras por rodada, pontuação por acerto |
-| **Cofre de Senhas** | Crie senhas que atendam a requisitos dinâmicos e progressivos | Requisitos gerados progressivamente, valida força e complexidade |
+| **Código (Wordle)** | Adivinhe a palavra secreta relacionada a segurança em N tentativas | Feedback por cor de letra (posição e existência) |
+| **Decriptar (Anagramas)** | Desembaralhe palavras e termos técnicos para pontuar | Múltiplas palavras por rodada, pontuação por acerto |
+| **Segredo (Cofre de Senhas)** | Crie senhas que atendam a requisitos dinâmicos e progressivos | Requisitos gerados progressivamente, valida força e complexidade |
 | **Patrulha Diária** | Mini-jogo diário de adivinhar PIN de 4 dígitos (Mastermind) | Feedback por posição e ocorrência, máximo 10 tentativas por dia |
 
 ---
@@ -284,50 +289,6 @@ QuestSet           → quest_sets             (sets de missões semanais)
 Mission            → missions               (missões com progresso e is_completed)
 GlobalSettings     → global_settings        (parâmetros globais do jogo via chave-valor)
 ```
-
-### Migrations Relevantes
-
-```bash
-flask db migrate -m "add is_externo to usuarios"
-flask db migrate -m "add external_user_id to quiz_attempts"
-flask db migrate -m "allow nullable guardian_id in quiz_attempts"
-flask db migrate -m "add avatar_seed to usuarios"
-flask db upgrade
-```
-
----
-
-## Patch Notes
-
-### v1.2 — Fevereiro 2026
-
-**Balanceamento**
-- Custo inicial de rolagem da loja: 5 GC → 3 GC
-- Multiplicador de custo por rolagem: 2× → 1.5×
-- Cooldown para troca de especialização: 14 dias → 5 dias
-- Aumentada chance de itens Épicos e Raros na loja e em missões
-- Recompensa de resgate de missões: +10 GC em todos os níveis
-- Quizzes perfeitos para gerar Token: 3 → 5
-- Novos bônus passivos para os caminhos Azul e Vermelho
-- Tempo limite do minigame "Segredo": 180s → 120s
-
-**Correções**
-- Cálculo de pontuação de itens, conquistas e especializações corrigido
-- Campo `expires_at` de `GuardianPurchase` não era gravado no banco
-- Bloqueado copiar, colar, Print Screen e F12 na página de quizzes
-- Analytics Hub: variáveis não inicializadas antes do bloco `try/except`
-- `BuildError` em `admin_quiz_analysis.html` por endpoint inexistente
-- Avatar do perfil externo sempre exibindo o default
-- Reset de temporada falhando silenciosamente por violação de FK
-
-**Novas Funcionalidades**
-- Modo Externo completo: fluxo de quiz, ranking exclusivo e perfil com gráfico e histórico
-- Gestão de externos no admin: reset de temporada e reset individual por usuário/quiz
-- Perfil externo com gráfico Chart.js, histórico paginado e mensagem motivacional dinâmica
-- Edição de perfil externo (nome e avatar) via modal inline
-- Avatar persistido no banco (`avatar_seed`) e exibido no ranking
-
----
 
 ## Sobre o Desenvolvimento
 
